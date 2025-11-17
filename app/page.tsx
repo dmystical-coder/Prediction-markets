@@ -12,16 +12,16 @@ export default function Home() {
   const { isConnected } = useAccount();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-950">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {!isConnected ? (
-          <div className="bg-white rounded-lg shadow-lg p-12 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="bg-gray-900 border border-gray-800 rounded-lg shadow-lg p-12 text-center">
+            <h2 className="text-3xl font-bold text-gray-100 mb-4">
               Welcome to Prediction Market
             </h2>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-gray-400 mb-8">
               Connect your wallet to start trading prediction tokens on Base
               Mainnet
             </p>
@@ -47,8 +47,10 @@ export default function Home() {
             <RedeemWinnings />
 
             {/* Contract Info */}
-            <div className="bg-gray-100 rounded-lg p-4 text-xs text-gray-600">
-              <p className="font-semibold mb-1">Contract Address:</p>
+            <div className="bg-gray-900 border border-gray-800 rounded-lg p-4 text-xs text-gray-400">
+              <p className="font-semibold mb-1 text-gray-300">
+                Contract Address:
+              </p>
               <p className="font-mono break-all">
                 0x0b65b804663972a37b6adba0785acde21db07fff
               </p>
@@ -57,7 +59,7 @@ export default function Home() {
                   href="https://basescan.org/address/0x0b65b804663972a37b6adba0785acde21db07fff"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
+                  className="text-blue-400 hover:underline"
                 >
                   View on BaseScan →
                 </a>

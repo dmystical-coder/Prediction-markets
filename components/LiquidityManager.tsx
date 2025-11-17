@@ -48,19 +48,19 @@ export function LiquidityManager() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">
+    <div className="bg-gray-900 border border-gray-800 rounded-lg shadow-lg p-6 mb-6">
+      <h2 className="text-2xl font-bold text-gray-100 mb-4">
         Liquidity Management
       </h2>
 
       {/* Tab Navigation */}
-      <div className="flex space-x-2 mb-6 border-b">
+      <div className="flex space-x-2 mb-6 border-b border-gray-800">
         <button
           onClick={() => setActiveTab("add")}
           className={`px-4 py-2 font-semibold transition-all ${
             activeTab === "add"
-              ? "text-blue-600 border-b-2 border-blue-600"
-              : "text-gray-600 hover:text-gray-900"
+              ? "text-blue-400 border-b-2 border-blue-400"
+              : "text-gray-400 hover:text-gray-200"
           }`}
         >
           Add Liquidity
@@ -69,8 +69,8 @@ export function LiquidityManager() {
           onClick={() => setActiveTab("remove")}
           className={`px-4 py-2 font-semibold transition-all ${
             activeTab === "remove"
-              ? "text-red-600 border-b-2 border-red-600"
-              : "text-gray-600 hover:text-gray-900"
+              ? "text-red-400 border-b-2 border-red-400"
+              : "text-gray-400 hover:text-gray-200"
           }`}
         >
           Remove Liquidity
@@ -81,7 +81,7 @@ export function LiquidityManager() {
       {activeTab === "add" && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
               ETH Amount to Add
             </label>
             <input
@@ -91,14 +91,14 @@ export function LiquidityManager() {
               placeholder="0.0"
               step="0.01"
               min="0"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
             />
           </div>
 
           <button
             onClick={handleAddLiquidity}
             disabled={!addAmount || isPending || isConfirming}
-            className="w-full px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            className="w-full px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors"
           >
             {isPending || isConfirming ? "Processing..." : "Add Liquidity"}
           </button>
@@ -109,7 +109,7 @@ export function LiquidityManager() {
       {activeTab === "remove" && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
               ETH Amount to Withdraw
             </label>
             <input
@@ -119,14 +119,14 @@ export function LiquidityManager() {
               placeholder="0.0"
               step="0.01"
               min="0"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent placeholder-gray-500"
             />
           </div>
 
           <button
             onClick={handleRemoveLiquidity}
             disabled={!removeAmount || isPending || isConfirming}
-            className="w-full px-6 py-3 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            className="w-full px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors"
           >
             {isPending || isConfirming ? "Processing..." : "Remove Liquidity"}
           </button>
@@ -137,28 +137,28 @@ export function LiquidityManager() {
       <div className="mt-4 space-y-2">
         {hash && (
           <div className="text-sm">
-            <p className="text-gray-600">Transaction Hash:</p>
-            <p className="font-mono text-xs break-all text-blue-600">{hash}</p>
+            <p className="text-gray-400">Transaction Hash:</p>
+            <p className="font-mono text-xs break-all text-blue-400">{hash}</p>
           </div>
         )}
 
         {isConfirming && (
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-            <p className="text-yellow-800">Waiting for confirmation...</p>
+          <div className="bg-yellow-950 border border-yellow-900 rounded-lg p-4">
+            <p className="text-yellow-400">Waiting for confirmation...</p>
           </div>
         )}
 
         {isSuccess && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <p className="text-green-800">
+          <div className="bg-green-950 border border-green-900 rounded-lg p-4">
+            <p className="text-green-400">
               Transaction confirmed successfully!
             </p>
           </div>
         )}
 
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-            <p className="text-red-800 text-sm">{error.message}</p>
+          <div className="bg-red-950 border border-red-900 rounded-lg p-4">
+            <p className="text-red-400 text-sm">{error.message}</p>
           </div>
         )}
       </div>
