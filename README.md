@@ -40,6 +40,7 @@ NEXT_PUBLIC_PROJECT_ID=your_reown_project_id_here
 ```
 
 To get a Project ID:
+
 - Visit [Reown Cloud](https://cloud.reown.com)
 - Create a new project
 - Copy your Project ID
@@ -55,33 +56,41 @@ npm run dev
 ## How to Use
 
 ### 1. Connect Your Wallet
+
 Click the "Connect Wallet" button in the header to connect your Web3 wallet to Base Mainnet.
 
 ### 2. View Market Information
+
 The market info card displays:
+
 - The prediction question
 - Current YES/NO probabilities
 - Token reserves
 - ETH collateral and trading revenue
 
 ### 3. Buy Tokens
+
 - Select YES or NO outcome
 - Enter the amount of tokens you want to buy
 - View the ETH cost
 - Click "Buy Tokens" to execute the transaction
 
 ### 4. Sell Tokens
+
 - Select the outcome (YES or NO)
 - Enter the amount of tokens to sell
 - View how much ETH you'll receive
 - Click "Sell Tokens" to execute the transaction
 
 ### 5. Manage Liquidity (Liquidity Providers)
+
 - **Add Liquidity**: Provide ETH to the market pool
 - **Remove Liquidity**: Withdraw your liquidity and trading fees
 
 ### 6. Redeem Winnings
+
 After the market is resolved by the oracle:
+
 - Enter the amount of winning tokens
 - Click "Redeem Tokens" to exchange them for ETH
 
@@ -155,4 +164,3 @@ npm run lint
 - [Wagmi Documentation](https://wagmi.sh)
 - [Base Documentation](https://docs.base.org)
 - [Next.js Documentation](https://nextjs.org/docs)
-

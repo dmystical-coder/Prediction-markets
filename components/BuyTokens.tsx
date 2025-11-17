@@ -1,23 +1,28 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
-import { PREDICTION_MARKET_CONFIG, Outcome } from '@/lib/contract-config';
-import { parseEther, formatEther } from 'viem';
+import { useState } from "react";
+import {
+  useWriteContract,
+  useReadContract,
+  useWaitForTransactionReceipt,
+} from "wagmi";
+import { PREDICTION_MARKET_CONFIG, Outcome } from "@/lib/contract-config";
+import { parseEther, formatEther } from "viem";
 
 export function BuyTokens() {
   const [selectedOutcome, setSelectedOutcome] = useState<Outcome>(Outcome.YES);
-  const [amount, setAmount] = useState('');
-  
+  const [amount, setAmount] = useState("");
+
   const { writeContract, data: hash, isPending, error } = useWriteContract();
 
   // Get the price for buying tokens
   const { data: priceInEth } = useReadContract({
     ...PREDICTION_MARKET_CONFIG,
-    functionName: 'getBuyPriceInEth',
-    args: amount && !isNaN(parseFloat(amount)) 
-      ? [selectedOutcome, parseEther(amount)]
-      : undefined,
+    functionName: "getBuyPriceInEth",
+    args:
+      amount && !isNaN(parseFloat(amount))
+        ? [selectedOutcome, parseEther(amount)]
+        : undefined,
   });
 
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
@@ -32,12 +37,12 @@ export function BuyTokens() {
     try {
       writeContract({
         ...PREDICTION_MARKET_CONFIG,
-        functionName: 'buyTokensWithETH',
+        functionName: "buyTokensWithETH",
         args: [selectedOutcome, parseEther(amount)],
         value: priceInEth || BigInt(0),
       });
     } catch (err) {
-      console.error('Error buying tokens:', err);
+      console.error("Error buying tokens:", err);
     }
   };
 
@@ -56,8 +61,8 @@ export function BuyTokens() {
               onClick={() => setSelectedOutcome(Outcome.YES)}
               className={`px-4 py-3 rounded-lg font-semibold transition-all ${
                 selectedOutcome === Outcome.YES
-                  ? 'bg-blue-500 text-white ring-2 ring-blue-600'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? "bg-blue-500 text-white ring-2 ring-blue-600"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
               YES
@@ -66,8 +71,8 @@ export function BuyTokens() {
               onClick={() => setSelectedOutcome(Outcome.NO)}
               className={`px-4 py-3 rounded-lg font-semibold transition-all ${
                 selectedOutcome === Outcome.NO
-                  ? 'bg-red-500 text-white ring-2 ring-red-600'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? "bg-red-500 text-white ring-2 ring-red-600"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
               NO
@@ -109,7 +114,7 @@ export function BuyTokens() {
           disabled={!amount || isPending || isConfirming || !priceInEth}
           className="w-full px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
         >
-          {isPending || isConfirming ? 'Processing...' : 'Buy Tokens'}
+          {isPending || isConfirming ? "Processing..." : "Buy Tokens"}
         </button>
 
         {/* Status Messages */}
@@ -119,19 +124,21 @@ export function BuyTokens() {
             <p className="font-mono text-xs break-all text-blue-600">{hash}</p>
           </div>
         )}
-        
+
         {isConfirming && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
             <p className="text-yellow-800">Waiting for confirmation...</p>
           </div>
         )}
-        
+
         {isSuccess && (
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <p className="text-green-800">Transaction confirmed! Tokens purchased successfully.</p>
+            <p className="text-green-800">
+              Transaction confirmed! Tokens purchased successfully.
+            </p>
           </div>
         )}
-        
+
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4">
             <p className="text-red-800 text-sm">{error.message}</p>

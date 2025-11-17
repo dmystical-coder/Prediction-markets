@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { Header } from '@/components/Header';
-import { MarketInfo } from '@/components/MarketInfo';
-import { BuyTokens } from '@/components/BuyTokens';
-import { SellTokens } from '@/components/SellTokens';
-import { LiquidityManager } from '@/components/LiquidityManager';
-import { RedeemWinnings } from '@/components/RedeemWinnings';
-import { useAccount } from 'wagmi';
+import { Header } from "@/components/Header";
+import { MarketInfo } from "@/components/MarketInfo";
+import { BuyTokens } from "@/components/BuyTokens";
+import { SellTokens } from "@/components/SellTokens";
+import { LiquidityManager } from "@/components/LiquidityManager";
+import { RedeemWinnings } from "@/components/RedeemWinnings";
+import { useAccount } from "wagmi";
 
 export default function Home() {
   const { isConnected } = useAccount();
@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
+
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {!isConnected ? (
           <div className="bg-white rounded-lg shadow-lg p-12 text-center">
@@ -22,7 +22,8 @@ export default function Home() {
               Welcome to Prediction Market
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              Connect your wallet to start trading prediction tokens on Base Mainnet
+              Connect your wallet to start trading prediction tokens on Base
+              Mainnet
             </p>
             <div className="flex justify-center">
               <appkit-button />
@@ -68,4 +69,3 @@ export default function Home() {
     </div>
   );
 }
-

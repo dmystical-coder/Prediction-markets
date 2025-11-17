@@ -1,13 +1,17 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
-import { PREDICTION_MARKET_CONFIG } from '@/lib/contract-config';
-import { parseEther } from 'viem';
+import { useState } from "react";
+import {
+  useWriteContract,
+  useReadContract,
+  useWaitForTransactionReceipt,
+} from "wagmi";
+import { PREDICTION_MARKET_CONFIG } from "@/lib/contract-config";
+import { parseEther } from "viem";
 
 export function RedeemWinnings() {
-  const [amount, setAmount] = useState('');
-  
+  const [amount, setAmount] = useState("");
+
   const { writeContract, data: hash, isPending, error } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
     hash,
@@ -16,7 +20,7 @@ export function RedeemWinnings() {
   // Check if market is reported
   const { data: marketData } = useReadContract({
     ...PREDICTION_MARKET_CONFIG,
-    functionName: 'getPrediction',
+    functionName: "getPrediction",
   });
 
   const isReported = marketData ? marketData[7] : false;
@@ -30,11 +34,11 @@ export function RedeemWinnings() {
     try {
       writeContract({
         ...PREDICTION_MARKET_CONFIG,
-        functionName: 'redeemWinningTokens',
+        functionName: "redeemWinningTokens",
         args: [parseEther(amount)],
       });
     } catch (err) {
-      console.error('Error redeeming tokens:', err);
+      console.error("Error redeeming tokens:", err);
     }
   };
 
@@ -42,20 +46,22 @@ export function RedeemWinnings() {
     try {
       writeContract({
         ...PREDICTION_MARKET_CONFIG,
-        functionName: 'resolveMarketAndWithdraw',
+        functionName: "resolveMarketAndWithdraw",
       });
     } catch (err) {
-      console.error('Error resolving market:', err);
+      console.error("Error resolving market:", err);
     }
   };
 
   if (!isReported) {
     return (
       <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-bold text-yellow-900 mb-2">Market Not Yet Resolved</h2>
+        <h2 className="text-xl font-bold text-yellow-900 mb-2">
+          Market Not Yet Resolved
+        </h2>
         <p className="text-yellow-800">
-          This market has not been reported by the oracle yet. Once the outcome is reported, 
-          you will be able to redeem your winning tokens here.
+          This market has not been reported by the oracle yet. Once the outcome
+          is reported, you will be able to redeem your winning tokens here.
         </p>
       </div>
     );
@@ -63,13 +69,16 @@ export function RedeemWinnings() {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">Redeem Winning Tokens</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-4">
+        Redeem Winning Tokens
+      </h2>
 
       {winningToken && (
         <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
           <p className="text-green-800 font-medium mb-1">Market Resolved!</p>
           <p className="text-sm text-green-700">
-            Winning Token: <span className="font-mono text-xs">{winningToken}</span>
+            Winning Token:{" "}
+            <span className="font-mono text-xs">{winningToken}</span>
           </p>
         </div>
       )}
@@ -100,7 +109,7 @@ export function RedeemWinnings() {
           disabled={!amount || isPending || isConfirming}
           className="w-full px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
         >
-          {isPending || isConfirming ? 'Processing...' : 'Redeem Tokens'}
+          {isPending || isConfirming ? "Processing..." : "Redeem Tokens"}
         </button>
 
         <div className="border-t pt-4">
@@ -112,10 +121,13 @@ export function RedeemWinnings() {
             disabled={isPending || isConfirming}
             className="w-full px-6 py-3 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
           >
-            {isPending || isConfirming ? 'Processing...' : 'Resolve Market & Withdraw'}
+            {isPending || isConfirming
+              ? "Processing..."
+              : "Resolve Market & Withdraw"}
           </button>
           <p className="mt-1 text-xs text-gray-500">
-            Only the market owner can resolve the market and withdraw remaining funds
+            Only the market owner can resolve the market and withdraw remaining
+            funds
           </p>
         </div>
 
@@ -126,19 +138,21 @@ export function RedeemWinnings() {
             <p className="font-mono text-xs break-all text-blue-600">{hash}</p>
           </div>
         )}
-        
+
         {isConfirming && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
             <p className="text-yellow-800">Waiting for confirmation...</p>
           </div>
         )}
-        
+
         {isSuccess && (
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <p className="text-green-800">Transaction confirmed successfully!</p>
+            <p className="text-green-800">
+              Transaction confirmed successfully!
+            </p>
           </div>
         )}
-        
+
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4">
             <p className="text-red-800 text-sm">{error.message}</p>

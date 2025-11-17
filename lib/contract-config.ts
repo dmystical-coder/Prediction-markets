@@ -1,6 +1,7 @@
-import { PREDICTION_MARKET_ABI } from './contract-abi';
+import { PREDICTION_MARKET_ABI } from "./contract-abi";
 
-export const PREDICTION_MARKET_ADDRESS = '0x0b65b804663972a37b6adba0785acde21db07fff' as const;
+export const PREDICTION_MARKET_ADDRESS =
+  "0x0b65b804663972a37b6adba0785acde21db07fff" as const;
 
 export const PREDICTION_MARKET_CONFIG = {
   address: PREDICTION_MARKET_ADDRESS,
@@ -14,6 +15,6 @@ export enum Outcome {
 }
 
 export const OUTCOME_LABELS = {
-  [Outcome.YES]: 'YES',
-  [Outcome.NO]: 'NO',
+  [Outcome.YES]: "YES",
+  [Outcome.NO]: "NO",
 } as const;
