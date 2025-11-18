@@ -1,7 +1,7 @@
 import { PREDICTION_MARKET_ABI } from "./contract-abi";
 
 export const PREDICTION_MARKET_ADDRESS =
-  "0x0b65b804663972a37b6adba0785acde21db07fff" as const;
+  "0xf59426136302a0030c1e3f270aadfaf58a131875" as const;
 
 export const PREDICTION_MARKET_CONFIG = {
   address: PREDICTION_MARKET_ADDRESS,

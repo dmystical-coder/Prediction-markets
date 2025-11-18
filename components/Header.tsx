@@ -3,25 +3,22 @@
 import { useAccount } from "wagmi";
 
 export function Header() {
-  const { isConnected, address } = useAccount();
+  const { address } = useAccount();
 
   return (
-    <header className="bg-gray-900 border-b border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-100">
+    <header className="border-b border-[#2D333B] bg-[#0D1117]">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-[#3B82F6] rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">PM</span>
+            </div>
+            <h1 className="text-lg font-semibold text-[#F9FAFB] tracking-tight">
               Prediction Market
             </h1>
-            <p className="text-sm text-gray-400">Powered by Base Mainnet</p>
           </div>
 
           <div className="flex items-center gap-4">
-            {isConnected && address && (
-              <div className="hidden sm:block text-sm text-gray-400">
-                {address.slice(0, 6)}...{address.slice(-4)}
-              </div>
-            )}
             <appkit-button />
           </div>
         </div>

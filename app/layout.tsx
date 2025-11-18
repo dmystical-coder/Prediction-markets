@@ -25,9 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} ${manrope.variable} antialiased`}
-      >
+      <body className={`${inter.variable} ${manrope.variable} antialiased`}>
         <Web3Provider>{children}</Web3Provider>
       </body>
     </html>

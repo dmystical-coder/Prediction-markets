@@ -1,6 +1,6 @@
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
-import { base } from "@reown/appkit/networks";
+import { sepolia } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
 
 // Get projectId from https://cloud.reown.com
@@ -15,14 +15,14 @@ if (!projectId) {
 // Create a metadata object
 const metadata = {
   name: "Prediction Market",
-  description: "Decentralized Prediction Market on Base",
+  description: "Decentralized Prediction Market on Sepolia",
   url: typeof window !== "undefined" ? window.location.origin : "",
   icons: ["https://avatars.githubusercontent.com/u/37784886"],
 };
 
 // Create Wagmi Adapter
 export const wagmiAdapter = new WagmiAdapter({
-  networks: [base],
+  networks: [sepolia],
   projectId,
   ssr: true,
 });
@@ -33,7 +33,7 @@ export const queryClient = new QueryClient();
 // Create the modal
 export const modal = createAppKit({
   adapters: [wagmiAdapter],
-  networks: [base],
+  networks: [sepolia],
   projectId,
   metadata,
   features: {
